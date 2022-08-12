@@ -1,7 +1,6 @@
 import configServer from './app';
 import './lib/db';
-
-class server extends configServer {
+class server extends configServer{
   PORT:number;
   constructor() {
     super();
