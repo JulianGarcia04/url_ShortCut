@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node ./src/index.ts",
-    "start": "tsc ./src/index.ts"
+    "start": "tsc"
   },
   "keywords": [],
   "author": "Julian Garcia <jcgrrincon@gmail.com>",
