@@ -7,7 +7,6 @@ class url {
     this.urlSchema = new Schema({
       originalUrl:{
         type: String,
-        unique: true,
         required: true,
         trim: true
       }
@@ -17,7 +16,7 @@ class url {
     })
   }
 
-  getModel(){
+  protected getModel(){
     return model('url', this.urlSchema);
   }
 }

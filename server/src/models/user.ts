@@ -1,6 +1,6 @@
 import {Schema, model} from 'mongoose';
 
-class user{
+class User{
   protected userSchema:Schema;
 
   constructor() {
@@ -33,4 +33,4 @@ class user{
 
 
 
-export default user;
+export default User;
