@@ -1,6 +1,6 @@
 import { Express, Router, Request, Response } from "express";
 
-class Url {
+class RoutesUrl {
   private router:Router = Router();
 
   constructor() {
@@ -30,4 +30,4 @@ class Url {
   }
 }
 
-export default Url;
+export default RoutesUrl;

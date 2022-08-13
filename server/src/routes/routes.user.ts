@@ -1,24 +1,20 @@
 import {Router, Request, Response} from 'express';
+import servicesUser from '../services/services.user';
 
-class RoutesUser {
+class RoutesUser extends servicesUser{
   private router:Router = Router();
 
   constructor() {
-    this.router.get('/user', (req:Request, res:Response)=>{
-      res.send('Estoy en usuarios')
-    })
-    this.router.get('/user/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en usuarios')
-    })
-    this.router.post('/user', (req:Request, res:Response)=>{
-      res.send('Estoy en usuarios')
-    })
-    this.router.put('/user/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en usuarios')
-    })
-    this.router.delete('/user/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en usuarios')
-    })
+    super();
+    this.router.get('/user', this.getUsers);
+
+    this.router.get('/user/:id', this.getUser);
+
+    this.router.post('/user', this.createData);
+
+    this.router.put('/user/:id', this.updateData);
+
+    this.router.delete('/user/:id', this.deleteData);
   }
 
   public getRouter(){

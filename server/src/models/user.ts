@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 class User{
-  protected userSchema:Schema;
+  private userSchema:Schema;
 
   constructor() {
     this.userSchema = new Schema({
@@ -15,7 +15,8 @@ class User{
       },
       email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
       },
       password: {
         type: String,
@@ -26,11 +27,11 @@ class User{
       timestamps: true
     })
   }
-  protected getModel(){
-    return model('user', this.userSchema);
+  getSchemaUser(){
+    return this.userSchema;
   }
 }
 
+let userModel = new User().getSchemaUser();
 
-
-export default User;
+export default model('user', userModel);
