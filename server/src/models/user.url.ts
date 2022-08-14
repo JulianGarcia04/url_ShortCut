@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 
 class UserUrl {
-  protected userUrlSchema:Schema = new Schema({
+  private _userUrlSchema:Schema = new Schema({
     id_user:{
       type:String,
       unique: true,
@@ -23,9 +23,11 @@ class UserUrl {
     timestamps: true
   })
 
-  protected getModel(){
-    return model('userUrl', this.userUrlSchema);
+  public get userUrlSchema(){
+    return this._userUrlSchema;
   }
 }
 
-export default UserUrl;
+const userUrlModel = new UserUrl().userUrlSchema;
+
+export default model('userUrl', userUrlModel);

@@ -3,9 +3,9 @@ import RoutesUser from "./routes.user";
 import RoutesUrl from "./routes.url";
 import RoutesUrlUser from './routes.userUrl';
 
-const routesUser = new RoutesUser().getRouter();
-const routesUrl = new RoutesUrl().getRouter();
-const routesUrlUser = new RoutesUrlUser().getRouter();
+const routesUser = new RoutesUser().router;
+const routesUrl = new RoutesUrl().router;
+const routesUrlUser = new RoutesUrlUser().router;
 
 const adminRoutes = (app:Express)=>{
   let routes = Router();

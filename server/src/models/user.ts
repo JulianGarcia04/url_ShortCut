@@ -1,10 +1,10 @@
 import {Schema, model} from 'mongoose';
 
 class User{
-  private userSchema:Schema;
+  private _userSchema:Schema;
 
   constructor() {
-    this.userSchema = new Schema({
+    this._userSchema = new Schema({
       nombre: {
         type: String,
         required: true
@@ -27,11 +27,11 @@ class User{
       timestamps: true
     })
   }
-  getSchemaUser(){
-    return this.userSchema;
+  get userSchema() {
+    return this._userSchema;
   }
 }
 
-let userModel = new User().getSchemaUser();
+let userModel = new User().userSchema;
 
 export default model('user', userModel);

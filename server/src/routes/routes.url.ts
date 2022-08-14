@@ -1,32 +1,32 @@
 import { Express, Router, Request, Response } from "express";
 
 class RoutesUrl {
-  private router:Router = Router();
+  private _router:Router = Router();
 
   constructor() {
-    this.router.get('/url', (req:Request, res:Response)=>{
+    this._router.get('/url', (req:Request, res:Response)=>{
       res.send('Estoy en URL');
     })
 
-    this.router.get('/url/:id', (req:Request, res:Response)=>{
+    this._router.get('/url/:id', (req:Request, res:Response)=>{
       res.send('Estoy en URL');
     })
 
-    this.router.post('/url', (req:Request, res:Response)=>{
+    this._router.post('/url', (req:Request, res:Response)=>{
       res.send('Estoy en URL');
     })
 
-    this.router.put('/url/:id', (req:Request, res:Response)=>{
+    this._router.put('/url/:id', (req:Request, res:Response)=>{
       res.send('Estoy en URL');
     })
 
-    this.router.delete('/url/:id', (req:Request, res:Response)=>{
+    this._router.delete('/url/:id', (req:Request, res:Response)=>{
       res.send('Estoy en URL');
     })
   }
 
-  getRouter(){
-    return this.router;
+  get router(){
+    return this._router;
   }
 }
 

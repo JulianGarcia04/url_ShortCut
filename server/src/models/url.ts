@@ -1,10 +1,10 @@
 import {Schema, model} from 'mongoose';
 
-class url {
-  protected urlSchema:Schema;
+class Url {
+  private _urlSchema:Schema;
 
   constructor() {
-    this.urlSchema = new Schema({
+    this._urlSchema = new Schema({
       originalUrl:{
         type: String,
         required: true,
@@ -16,9 +16,11 @@ class url {
     })
   }
 
-  protected getModel(){
-    return model('url', this.urlSchema);
+  public get urlSchema(){
+    return this._urlSchema;
   }
 }
 
-export default url;
+const urlModel = new Url().urlSchema;
+
+export default model('url', urlModel);

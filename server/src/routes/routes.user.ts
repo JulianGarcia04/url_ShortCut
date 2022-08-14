@@ -2,23 +2,23 @@ import {Router, Request, Response} from 'express';
 import servicesUser from '../services/services.user';
 
 class RoutesUser extends servicesUser{
-  private router:Router = Router();
+  private _router:Router = Router();
 
   constructor() {
     super();
-    this.router.get('/user', this.getUsers);
+    this._router.get('/user', this.getUsers);
 
-    this.router.get('/user/:id', this.getUser);
+    this._router.get('/user/:id', this.getUser);
 
-    this.router.post('/user', this.createData);
+    this._router.post('/user', this.createData);
 
-    this.router.put('/user/:id', this.updateData);
+    this._router.put('/user/:id', this.updateData);
 
-    this.router.delete('/user/:id', this.deleteData);
+    this._router.delete('/user/:id', this.deleteData);
   }
 
-  public getRouter(){
-    return this.router;
+  public get router(){
+    return this._router;
   }
 }
 
