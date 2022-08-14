@@ -5,7 +5,7 @@ import cors from 'cors';
 import adminRoutes from './routes/routes.admin';
 
 dotenv.config();
-class configServer {
+abstract class configServer {
   protected app:Express=express();
 
   constructor(){

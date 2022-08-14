@@ -2,7 +2,7 @@ import user from '../models/user';
 import { Request, Response, NextFunction } from 'express';
 import boom from '@hapi/boom';
 
-class servicesUser {
+abstract class servicesUser {
 
   protected async getUsers(req:Request, res:Response, next:NextFunction){
     try {
