@@ -1,28 +1,20 @@
-import { Express, Router, Request, Response } from "express";
+import {Router} from "express";
+import ServicesUrl from "../services/services.url";
 
-class RoutesUrl {
+class RoutesUrl extends ServicesUrl {
   private _router:Router = Router();
 
   constructor() {
-    this._router.get('/url', (req:Request, res:Response)=>{
-      res.send('Estoy en URL');
-    })
+    super();
+    this._router.get('/url', this.getUrls);
 
-    this._router.get('/url/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en URL');
-    })
+    this._router.get('/url/:id', this.getUrl);
 
-    this._router.post('/url', (req:Request, res:Response)=>{
-      res.send('Estoy en URL');
-    })
+    this._router.post('/url', this.createUrl);
 
-    this._router.put('/url/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en URL');
-    })
+    this._router.put('/url/:id', this.updateUrl);
 
-    this._router.delete('/url/:id', (req:Request, res:Response)=>{
-      res.send('Estoy en URL');
-    })
+    this._router.delete('/url/:id', this.deleteUrl);
   }
 
   get router(){

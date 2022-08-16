@@ -1,4 +1,4 @@
-import {Router, Request, Response} from 'express';
+import {Router} from 'express';
 import servicesUser from '../services/services.user';
 
 class RoutesUser extends servicesUser{
@@ -6,6 +6,7 @@ class RoutesUser extends servicesUser{
 
   constructor() {
     super();
+
     this._router.get('/user', this.getUsers);
 
     this._router.get('/user/:id', this.getUser);

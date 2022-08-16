@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import adminRoutes from './routes/routes.admin';
+import errorHandler from './middlewares/error.hadler';
 
 dotenv.config();
 abstract class configServer {
@@ -13,7 +14,11 @@ abstract class configServer {
     this.app.use(express.json());
     this.app.use(morgan('dev'));
     this.app.use(cors());
+    this.app.use(express.urlencoded());
     adminRoutes(this.app);
+    this.app.use(errorHandler.errorHandler);
+    this.app.use(errorHandler.boomErrorHandler);
+    this.app.use(errorHandler.formatError);
   }
 }
 
