@@ -1,20 +1,21 @@
 import {Router} from "express";
 import ServicesUrl from "../services/services.url";
+import { validationSession } from "../middlewares/validation.session";
 
 class RoutesUrl extends ServicesUrl {
   private _router:Router = Router();
 
   constructor() {
     super();
-    this._router.get('/url', this.getUrls);
+    this._router.get('/url', validationSession, this.getUrls);
 
-    this._router.get('/url/:id', this.getUrl);
+    this._router.get('/url/:id', validationSession, this.getUrl);
 
-    this._router.post('/url', this.createUrl);
+    this._router.post('/url', validationSession, this.createUrl);
 
-    this._router.put('/url/:id', this.updateUrl);
+    this._router.put('/url/:id', validationSession, this.updateUrl);
 
-    this._router.delete('/url/:id', this.deleteUrl);
+    this._router.delete('/url/:id', validationSession, this.deleteUrl);
   }
 
   get router(){
