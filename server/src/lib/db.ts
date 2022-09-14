@@ -17,15 +17,20 @@ class connection {
 
   async Connection(){
     try {
-      this.db = await mongoose.connect(`mongodb://${this.HOST}:${this.PORT}/${this.DATA_BASES}`);
-      console.log(`database is connected with mongodb`);
+      if (!this.db) {
+        this.db = await mongoose.connect(`mongodb://${this.HOST}:${this.PORT}/${this.DATA_BASES}`);
+        console.log(`database is connected with mongodb`);
+        return this.db
+      } else {
+        return this.db
+      }
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-let db = new connection();
+let db = new connection().Connection();
 
-db.Connection();
+export default db;
 

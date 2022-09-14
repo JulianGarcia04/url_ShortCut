@@ -1,12 +1,14 @@
-import user from '../models/user';
+import User from '../models/user';
 import { Request, Response, NextFunction } from 'express';
 import boom from '@hapi/boom';
+import jwt, { Secret } from 'jsonwebtoken';
+import env from 'dotenv';
 
+env.config();
 abstract class servicesUser {
-
   protected async getUsers(req:Request, res:Response, next:NextFunction){
     try {
-      let datas = await user.find();
+      let datas = await User.find();
       if (datas.length == 0) {
         throw boom.notFound('Not data in databases');
       }
@@ -18,8 +20,8 @@ abstract class servicesUser {
 
   protected async getUser(req:Request, res:Response, next:NextFunction){
     try {
-      let {id} = req.params;
-      let data = await user.findById(id);
+      let id = req.userId
+      let data = await User.findById(id);
       if(!data){
         throw boom.notFound('Data not exists')
       }
@@ -29,17 +31,45 @@ abstract class servicesUser {
     }
   }
 
-  protected async createData(req:Request, res:Response, next:NextFunction){
+  protected async loginUser(req:Request, res:Response, next:NextFunction){
     try {
-      let dataFound = await user.findOne({email:req.body.email});
-      let body = req.body;
+      const {email, password} = req.body;
+      const user = await User.findOne({email});
+      if(!user){
+        throw boom.unauthorized("The email isn't correct");
+      }
+      const validatePassword = await user.validatePassword(password);
+      if (validatePassword) {
+        throw boom.unauthorized("The password isn't correct")
+      }
+      const token = jwt.sign({id: user._id}, process.env.SECURE as Secret, {
+        expiresIn: 60*60*24
+      });
+      res.setHeader('x-access-token', token);
+      res.json("Welcome to the jungle")
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  protected async createUser(req:Request, res:Response, next:NextFunction){
+    try {
+      let {urlImage, nombre, email, password} = req.body;
+      let dataFound = await User.findOne({email});
       if (dataFound) {
         throw boom.badData("data now is created");
       }
-      let data = await user.create(body);
+      let user = new User({urlImage, nombre, email, password});
+      user.password = await user.encryptPassword(password);
+      await user.save();
+      const token = jwt.sign({id: user._id}, process.env.SECURE as Secret, {
+        expiresIn: 60*60*24
+      });
+      res.setHeader('x-access-token', token);
       res.json({
         message:"Data created",
-        data: data
+        data: user,
+        auth: true
       })
     } catch (error) {
       next(error);
@@ -50,11 +80,11 @@ abstract class servicesUser {
     try {
       let body = req.body;
       let {id} = req.params;
-      let oldData = await user.findById(id);
+      let oldData = await User.findById(id);
       if (!oldData) {
         throw boom.notFound('data not exists');
       }
-      let newData = await user.findByIdAndUpdate(id, body, {new:true});
+      let newData = await User.findByIdAndUpdate(id, body, {new:true});
       res.json({
         message: "data updated",
         oldData:oldData,
@@ -68,7 +98,7 @@ abstract class servicesUser {
   protected async deleteData(req:Request, res:Response, next:NextFunction){
     try {
       let {id} = req.params;
-      let data = await user.findByIdAndDelete(id);
+      let data = await User.findByIdAndDelete(id);
       if (!data) {
         throw boom.conflict('data not exists');
       }

@@ -1,15 +1,17 @@
 import {Schema, model} from 'mongoose';
+import bcrypt from 'bcryptjs';
+
 
 class User{
   private _userSchema:Schema;
 
   constructor() {
     this._userSchema = new Schema({
-      nombre: {
+      urlImage: {
         type: String,
-        required: true
+        required: false
       },
-      apellido: {
+      nombre: {
         type: String,
         required: true
       },
@@ -31,7 +33,16 @@ class User{
     return this._userSchema;
   }
 }
-
 let userModel = new User().userSchema;
+
+userModel.methods.encryptPassword = async (password:string)=>{
+ const salt = await bcrypt.genSalt(10);
+ return bcrypt.hash(password, salt);
+}
+
+userModel.methods.validatePassword = async function(password:string){
+  let validation = await bcrypt.compare(password, this.password);
+  return validation
+}
 
 export default model('user', userModel);

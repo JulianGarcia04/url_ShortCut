@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import servicesUser from '../services/services.user';
-
+import { validationSession } from '../middlewares/validation.session';
 class RoutesUser extends servicesUser{
   private _router:Router = Router();
 
@@ -9,9 +9,11 @@ class RoutesUser extends servicesUser{
 
     this._router.get('/user', this.getUsers);
 
-    this._router.get('/user/:id', this.getUser);
+    this._router.get('/user/id', validationSession,  this.getUser);
 
-    this._router.post('/user', this.createData);
+    this._router.post('/user/login', this.loginUser);
+
+    this._router.post('/user', this.createUser);
 
     this._router.put('/user/:id', this.updateData);
 

@@ -1,4 +1,4 @@
-import multer, { Multer, StorageEngine } from 'multer';
+import multer from 'multer';
 import path from 'path';
 import {v4} from 'uuid';
 import boom from '@hapi/boom';

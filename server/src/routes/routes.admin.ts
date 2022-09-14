@@ -13,7 +13,6 @@ const routesUploadImage = new RoutesUploadImage().router;
 const adminRoutes = (app:Express)=>{
   let routes = Router();
   app.use('/api/v1', routes);
-
   routes.use(routesUrlUser);
   routes.use(routesUser);
   routes.use(routesUrl);

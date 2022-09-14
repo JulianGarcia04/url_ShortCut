@@ -14,7 +14,6 @@ abstract class configServer {
     this.app.use(express.json());
     this.app.use(morgan('dev'));
     this.app.use(cors());
-    this.app.use(express.urlencoded());
     adminRoutes(this.app);
     this.app.use(errorHandler.errorHandler);
     this.app.use(errorHandler.boomErrorHandler);
