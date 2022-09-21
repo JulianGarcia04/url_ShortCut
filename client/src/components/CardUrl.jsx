@@ -11,10 +11,10 @@ const CardUrl = ()=>{
         <div className={`cardUrl ${stateMenu.modal? 'h-50':''}`}>
             <div className="headerCard">
                 <span>https://mail.google.com/mail/u/0/#inbox</span>
-                <img src={arrowMenu} alt="arrowMenu" width={15} onClick={stateMenu.changeState} />
+                <img src={arrowMenu} alt="arrowMenu" width={15} className="arrowMenuCard" onClick={stateMenu.changeState} />
             </div>
             {
-                stateMenu.modal&&
+                (stateMenu.modal || window.screen.availWidth >= 1024)&&
                 <div className="footerCard">
                     <span>https://beatly/5ED12</span>
                     <button>Copy</button>

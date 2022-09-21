@@ -1,5 +1,6 @@
-import React, {useState, useRef, useEffect} from "react";
-import useModal from "../hooks/useModal";
+import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { changeStateMenu } from '../features/navBar/navBarSlice';
 import menuBars from '../static/icons/bars-solid.svg';
 import iconQuestion from '../static/icons/icon-sidebar-question.svg';
 import arrowMenu from '../static/icons/icon-sidebar-back.svg';
@@ -11,29 +12,19 @@ import '../static/styles/NavBar.scss';
 
 const NavBar = ()=>{
 
-    const [menu, setMenu] = useState(false);
+    const stateMenu = useSelector(state=>state.stateMenu.value)
 
-    const stateModal = useModal();
-
-    const navBar = useRef(null);
-    const iconArrow = useRef(null);
-
-    const abrirMenu = ()=>{
-        stateModal.changeState();
-        navBar.current.classList.toggle('open');
-        iconArrow.current.classList.toggle('rotate');
-    }
-
+    const dispatch = useDispatch();
 
     return (
-        <nav ref={navBar} className="nav-container">
+        <nav className={`nav-container ${stateMenu?'open':''}`}>
             <div className="nav-header">
-                <img ref={iconArrow} src={arrowMenu} alt="" width={30} className="arrowMenu" onClick={abrirMenu}/>
+                <img src={arrowMenu} alt="" width={30} className={`arrowMenu ${stateMenu?'rotate':''}`} onClick={()=>dispatch(changeStateMenu())}/>
                 <h1>BEATLY</h1>
-                <img src={menuBars} alt="" width={30} className="menuBars" onClick={abrirMenu}/>
+                <img src={menuBars} alt="" width={30} className="menuBars" onClick={()=>dispatch(changeStateMenu())}/>
             </div>
             {
-                (stateModal.modal || window.screen.availWidth >= 1024) &&
+                (stateMenu || window.screen.availWidth >= 1024) &&
                 <>
                     <div className="nav-body">
                         <div>
