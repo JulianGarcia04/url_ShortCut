@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { changeStateMenu } from '../features/navBar/navBarSlice';
 import menuBars from '../static/icons/bars-solid.svg';
@@ -16,11 +17,14 @@ const NavBar = ()=>{
 
     const dispatch = useDispatch();
 
+
     return (
         <nav className={`nav-container ${stateMenu?'open':''}`}>
             <div className="nav-header">
                 <img src={arrowMenu} alt="" width={30} className={`arrowMenu ${stateMenu?'rotate':''}`} onClick={()=>dispatch(changeStateMenu())}/>
-                <h1>BEATLY</h1>
+                <Link to={'/'} className="logo">
+                    <h4>BEATLY</h4>
+                </Link>
                 <img src={menuBars} alt="" width={30} className="menuBars" onClick={()=>dispatch(changeStateMenu())}/>
             </div>
             {
@@ -45,10 +49,12 @@ const NavBar = ()=>{
                             <img src={iconSingUp} alt="Register" width={30} />
                             <span>Sign Up</span>
                         </div>
-                        <div>
-                            <img src={iconSingIn} alt="Login" width={30} />
-                            <span>Sign in</span>
-                        </div>
+                        <Link to={'/login'} className="loginUrl">
+                            <div>
+                                <img src={iconSingIn} alt="Login" width={30} />
+                                <span>Sign In</span>
+                            </div>
+                        </Link>
                     </div>
                 </>
             }

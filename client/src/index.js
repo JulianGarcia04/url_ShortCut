@@ -19,7 +19,7 @@ root.render(
           <Routes>
             <Route path='/' element={<App/>}/>
             <Route path='/me' element={<Me/>}/>
-            <Route path='/login' element={<Login/>}/>
+            <Route path='/Login' element={<Login/>}/>
             <Route path='/register' element={<SignUp/>}/>
           </Routes>
         </MainLayout>

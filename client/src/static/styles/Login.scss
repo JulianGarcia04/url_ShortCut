@@ -1,0 +1,88 @@
+.background-container{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.principal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 60%;
+    background-color: var(--bg-color-yellow);
+
+    h1{
+        font-size: 40px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 80%;
+        height: 70%;
+
+        div {
+            width: 100%;
+            height: 50px;
+            input{
+                border: none;
+                padding: 0px 10px;
+                box-sizing: border-box;
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+            }
+    
+            input::placeholder{
+                font-size: 20px;
+                font-family: 'Dancing Script', cursive;
+            }
+        }
+        label{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 30%;
+            #checkMe{
+                border-radius: 10px;
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+
+        button{
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--bg-color-green);
+            font-size: 25px;
+            font-family: 'Dancing Script', cursive;
+        }
+    }
+}
+
+.formPassword{
+    position: relative;
+    .eye{
+        position: absolute;
+        right: 10px;
+        top: 30%;
+        color: var(--bg-color-green);
+    }
+}
+
+@media (min-width: 1024px){
+    .principal-container{
+        height: 70%;
+        form{
+            width: 21.875em;
+            height: 70%;
+        }
+    }
+}

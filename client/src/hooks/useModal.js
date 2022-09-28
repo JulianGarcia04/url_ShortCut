@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
-const useModal = ()=>{
-    const [modal, setModal] = useState(false);
+const useBooleanState = ()=>{
+    const [state, setState] = useState(false);
 
     const changeState = ()=>{
-        setModal(!modal)
+        setState(!state)
     }
 
     return {
-        modal,
+        state,
         changeState
     };
 }
 
-export default useModal
+export default useBooleanState
