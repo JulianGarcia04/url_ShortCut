@@ -54,12 +54,12 @@ abstract class servicesUser {
 
   protected async createUser(req:Request, res:Response, next:NextFunction){
     try {
-      let {urlImage, nombre, email, password} = req.body;
+      let {urlImage, username, nombre, apellido, email, password} = req.body;
       let dataFound = await User.findOne({email});
       if (dataFound) {
         throw boom.badData("data now is created");
       }
-      let user = new User({urlImage, nombre, email, password});
+      let user = new User({urlImage, username, nombre, apellido, email, password});
       user.password = await user.encryptPassword(password);
       await user.save();
       const token = jwt.sign({id: user._id}, process.env.SECURE as Secret, {

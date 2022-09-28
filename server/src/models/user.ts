@@ -11,7 +11,15 @@ class User{
         type: String,
         required: false
       },
+      username:{
+        type: String,
+        required: true
+      },
       nombre: {
+        type: String,
+        required: true
+      },
+      apellido: {
         type: String,
         required: true
       },
