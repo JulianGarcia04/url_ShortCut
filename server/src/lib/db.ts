@@ -5,20 +5,20 @@ dotenv.config();
 
 class connection {
   private db:any;
-  private HOST:string | undefined;
-  private PORT:string|undefined;
+  private USERNAME:string | undefined;
+  private PASSWORD:string|undefined;
   private DATA_BASES:string|undefined;
 
   constructor(){
-    this.HOST = process.env.MONGO_HOST;
-    this.PORT = process.env.MONGO_PORT;
+    this.USERNAME = process.env.MONGO_USERNAME;
+    this.PASSWORD = process.env.MONGO_PASSWORD;
     this.DATA_BASES = process.env.MONGO_DATABASE;
   }
 
   async Connection(){
     try {
       if (!this.db) {
-        this.db = await mongoose.connect(`mongodb://${this.HOST}:${this.PORT}/${this.DATA_BASES}`);
+        this.db = await mongoose.connect(`mongodb+srv://${this.USERNAME}:${this.PASSWORD}@${this.DATA_BASES}.i09hovr.mongodb.net/?retryWrites=true&w=majority`);
         console.log(`database is connected with mongodb`);
         return this.db
       } else {
