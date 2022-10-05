@@ -15,11 +15,11 @@ class User{
         type: String,
         required: true
       },
-      nombre: {
+      name: {
         type: String,
         required: true
       },
-      apellido: {
+      lastname: {
         type: String,
         required: true
       },

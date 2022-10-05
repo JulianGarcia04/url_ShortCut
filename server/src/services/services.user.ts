@@ -33,13 +33,16 @@ abstract class servicesUser {
 
   protected async loginUser(req:Request, res:Response, next:NextFunction){
     try {
-      const {email, password} = req.body;
-      const user = await User.findOne({email});
+      const {email, username, password} = req.body;
+      const user = email
+                 ? await User.findOne({email})
+                 : await User.findOne({username})
+
       if(!user){
         throw boom.unauthorized("The email isn't correct");
       }
       const validatePassword = await user.validatePassword(password);
-      if (validatePassword) {
+      if (!validatePassword) {
         throw boom.unauthorized("The password isn't correct")
       }
       const token = jwt.sign({id: user._id}, process.env.SECURE as Secret, {
@@ -48,18 +51,18 @@ abstract class servicesUser {
       res.setHeader('x-access-token', token);
       res.json("Welcome to the jungle")
     } catch (error) {
-      next(error);
+        next(error);
     }
   }
 
   protected async createUser(req:Request, res:Response, next:NextFunction){
     try {
-      let {urlImage, username, nombre, apellido, email, password} = req.body;
+      let {urlImage, username, name, lastname, email, password} = req.body;
       let dataFound = await User.findOne({email});
       if (dataFound) {
         throw boom.badData("data now is created");
       }
-      let user = new User({urlImage, username, nombre, apellido, email, password});
+      let user = new User({urlImage, username, name, lastname, email, password});
       user.password = await user.encryptPassword(password);
       await user.save();
       const token = jwt.sign({id: user._id}, process.env.SECURE as Secret, {

@@ -9,13 +9,7 @@ class RoutesUrl extends ServicesUrl {
     super();
     this._router.get('/url', validationSession, this.getUrls);
 
-    this._router.get('/url/:id', validationSession, this.getUrl);
-
     this._router.post('/url', validationSession, this.createUrl);
-
-    this._router.put('/url/:id', validationSession, this.updateUrl);
-
-    this._router.delete('/url/:id', validationSession, this.deleteUrl);
   }
 
   get router(){
