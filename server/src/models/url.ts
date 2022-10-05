@@ -8,6 +8,7 @@ class Url {
       originalUrl:{
         type: String,
         required: true,
+        unique: true,
         trim: true
       }
     },{

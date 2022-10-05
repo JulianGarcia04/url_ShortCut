@@ -20,6 +20,7 @@ class connection {
       if (!this.db) {
         this.db = await mongoose.connect(`mongodb+srv://${this.USERNAME}:${this.PASSWORD}@${this.DATA_BASES}.i09hovr.mongodb.net/?retryWrites=true&w=majority`);
         console.log(`database is connected with mongodb`);
+        await mongoose.syncIndexes()
         return this.db
       } else {
         return this.db

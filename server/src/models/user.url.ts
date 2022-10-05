@@ -5,7 +5,6 @@ class UserUrl {
   private _userUrlSchema:Schema = new Schema({
     id_user:{
       type:String,
-      unique: true,
       required: true,
     },
     id_url:{

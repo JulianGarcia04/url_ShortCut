@@ -11,13 +11,6 @@ class routesUserUrl extends ServicesUserUrl{
 
     this._router.get('/user/url', validationSession, this.getAll);
 
-    this._router.get('/user/url/:id', validationSession, this.getOne);
-
-    this._router.post('/user/url', validationSession, this.createOne);
-
-    this._router.put('/user/url/:id', validationSession, this.updateOne);
-
-    this._router.delete('/user/url/:id', validationSession, this.deleteOne);
   }
 
   get router(){
