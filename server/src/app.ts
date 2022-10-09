@@ -13,7 +13,10 @@ abstract class configServer {
     this.app.set('PORT', process.env.PORT || 4000);
     this.app.use(express.json());
     this.app.use(morgan('dev'));
-    this.app.use(cors());
+    this.app.use(cors({
+      origin: "*",
+      exposedHeaders: ['x-access-token']
+    }));
     adminRoutes(this.app);
     this.app.use(errorHandler.errorHandler);
     this.app.use(errorHandler.boomErrorHandler);

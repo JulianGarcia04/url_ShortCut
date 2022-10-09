@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
 const useValue = ()=>{
-    const [inputUser, setInputUser] = useState('');
+    const [input, setInput] = useState('');
 
     const handleChange = (e)=>{
-        setInputUser(e.target.value);
+        setInput(e.target.value);
     }
 
     return {
         reducer: {
-            inputUser
+            input
         },
         actions: {
             handleChange
