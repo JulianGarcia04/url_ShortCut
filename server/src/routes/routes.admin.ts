@@ -19,7 +19,7 @@ const adminRoutes = (app:Express)=>{
   routes.use(routesUser);
   routes.use(routesUrl);
   routes.use(routesUploadImage);
-  routes.use('/user/images', express.static(path.join(__dirname, '../public/images')))
+  routes.use('/user', express.static(path.join(__dirname, '../../public')))
 }
 
 export default adminRoutes;

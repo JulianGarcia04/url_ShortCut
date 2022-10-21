@@ -10,7 +10,7 @@ abstract class servicesUser {
     try {
       let datas = await User.find();
       if (datas.length == 0) {
-        throw boom.notFound('Not data in databases');
+        throw boom.notFound("The database doesn't has data");
       }
       res.json(datas);
     } catch (error) {
@@ -23,7 +23,7 @@ abstract class servicesUser {
       let id = req.userId
       let data = await User.findById(id);
       if(!data){
-        throw boom.notFound('Data not exists')
+        throw boom.notFound("Data does't exists, because the email is registed")
       }
       res.json(data);
     } catch (error) {
@@ -60,7 +60,7 @@ abstract class servicesUser {
       let {urlImage, username, name, lastname, email, password} = req.body;
       let dataFound = await User.findOne({email});
       if (dataFound) {
-        throw boom.badData("data now is created");
+        throw boom.badData("Data wasn't created");
       }
       let user = new User({urlImage, username, name, lastname, email, password});
       user.password = await user.encryptPassword(password);
@@ -85,7 +85,7 @@ abstract class servicesUser {
       let {id} = req.params;
       let oldData = await User.findById(id);
       if (!oldData) {
-        throw boom.notFound('data not exists');
+        throw boom.notFound("data doesn't exists");
       }
       let newData = await User.findByIdAndUpdate(id, body, {new:true});
       res.json({
@@ -103,7 +103,7 @@ abstract class servicesUser {
       let {id} = req.params;
       let data = await User.findByIdAndDelete(id);
       if (!data) {
-        throw boom.conflict('data not exists');
+        throw boom.conflict("data doesn't exists");
       }
       res.json({
         message: "data deleted",
