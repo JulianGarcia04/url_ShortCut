@@ -25,7 +25,7 @@ const Login = ()=>{
         passwordInput:userPassword.reducer.input
     }
 
-    const onSubmit = async (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         const token = await usersLoginController(data);
         dispatch(setToken(token))
@@ -37,7 +37,7 @@ const Login = ()=>{
         <div className="background-container">
             <div className="principal-container">
                 <h1>Sign in</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <input type={userName.reducer.input.search('@')!==-1?'email':'text'} placeholder="User/email" autoComplete="off" required onChange={userName.actions.handleChange}/>
                     </div>
@@ -53,7 +53,7 @@ const Login = ()=>{
                         <input type="checkbox" id="checkMe"/>
                         Remember me
                     </label>
-                    <button type="submit" onClick={onSubmit}>Sign In</button>
+                    <button type="submit">Sign In</button>
                 </form>
             </div>
         </div>

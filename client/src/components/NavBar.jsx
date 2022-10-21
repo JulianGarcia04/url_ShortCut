@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
+import { setToken } from "../features/token/tokenSlice";
 import { changeStateMenu } from '../features/navBar/navBarSlice';
 import { getUser } from "../services/users.services";
+import setCookie from "../utils/setCookie";
 import menuBars from '../static/icons/bars-solid.svg';
 import iconQuestion from '../static/icons/icon-sidebar-question.svg';
 import arrowMenu from '../static/icons/icon-sidebar-back.svg';
@@ -22,7 +24,10 @@ const NavBar = ()=>{
   const [user, setUser] = useState({});
 
   useEffect(()=>{
-    getUser(token).then(res=>setUser(res.data))
+    if(!token){
+        return
+    }
+    getUser(token).then(res=>setUser(res.data)).catch(e=>console.log("No haz iniciado sesion"))
   }, [token])
   
   const dispatch = useDispatch();
@@ -68,24 +73,29 @@ const NavBar = ()=>{
             <div className="nav-footer">
             {token ? (
                 <>
-                <div>
+                    <div>
                         <img src={iconUser} alt="" width={30} />
                         <span>{user.username}</span>
-                </div>
-                <Link to={"/login"} className="loginUrl">
-                    <div>
-                        <img src={iconLogout} alt="" width={30} />
-                        <span>Logout</span>
                     </div>
-                </Link>
+                    <Link to={"/login"} className="Url" onClick={()=>{
+                        setCookie('__auth_user', '');
+                        dispatch(setToken(''))
+                    }}>
+                        <div>
+                            <img src={iconLogout} alt="" width={30} />
+                            <span>Logout</span>
+                        </div>
+                    </Link>
                 </>
             ) : (
                 <>
-                <div>
-                    <img src={iconSingUp} alt="Register" width={30}/>
-                    <span>Sign Up</span>
-                </div>
-                <Link to={"/login"} className="loginUrl">
+                <Link to={"/register"} className="Url">
+                    <div>
+                        <img src={iconSingUp} alt="Register" width={30}/>
+                        <span>Sign Up</span>
+                    </div>
+                </Link>
+                <Link to={"/login"} className="Url">
                     <div>
                     <img src={iconSingIn} alt="Login" width={30} />
                     <span>Sign In</span>

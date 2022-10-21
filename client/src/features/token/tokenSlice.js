@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
+import getCookie from "../../utils/getCookie";
 
 export const tokenSlice = createSlice({
     name: "token",
     initialState: {
-        value: document.cookie.split(';').find(e=>e.search('__auth_user')!==-1)
-               &&document.cookie.split(';').find(e=>e.search('__auth_user')!==-1).split('=')[1]
+        value: getCookie('__auth_user')
                
     },
     reducers:{

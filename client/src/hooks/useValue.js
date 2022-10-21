@@ -3,8 +3,11 @@ import { useState } from 'react';
 const useValue = ()=>{
     const [input, setInput] = useState('');
 
-    const handleChange = (e)=>{
-        setInput(e.target.value);
+    const handleChange = (e, event)=>{
+        !e
+        ?setInput(event.target.value)
+        :setInput(e.target.value)
+        
     }
 
     return {
