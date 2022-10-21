@@ -6,9 +6,7 @@ import boom from '@hapi/boom';
 class UploadImage{
     uploadImage(){
       let storage = multer.diskStorage({
-        destination: (req, file, cb)=>{
-          cb(null, path.join(__dirname, '../public/images'));
-        },
+        destination: path.join(__dirname, '../../public/images'),
         filename: (req, file, cb)=>{
           cb(null, v4() + path.extname(file.originalname));
         }

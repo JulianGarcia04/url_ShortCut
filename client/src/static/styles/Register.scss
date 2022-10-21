@@ -1,0 +1,91 @@
+.background-container{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.principal-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 90%;
+    background-color: var(--bg-color-yellow);
+
+    h1{
+        font-size: 40px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 80%;
+        height: 100%;
+
+        div {
+            width: 100%;
+            height: 50px;
+            input{
+                border: none;
+                padding: 0px 10px;
+                box-sizing: border-box;
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+            }
+    
+            input::placeholder{
+                font-size: 20px;
+                font-family: 'Dancing Script', cursive;
+            }
+
+            .imageUpload {
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 10px;
+                border-radius: 10px;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                color: #666;
+                font-size: 20px;
+                input[type="file"]{
+                    display: none;
+                }
+            }
+        }
+
+
+        button{
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--bg-color-green);
+            font-size: 25px;
+            font-family: 'Dancing Script', cursive;
+        }
+    }
+}
+
+.formPassword{
+    position: relative;
+    .eye{
+        position: absolute;
+        right: 10px;
+        top: 30%;
+        color: var(--bg-color-green);
+    }
+}
+
+@media (min-width: 1024px){
+    .principal-container{
+        form{
+            width: 21.875em;
+        }
+    }
+}

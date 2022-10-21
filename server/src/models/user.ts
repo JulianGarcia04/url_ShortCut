@@ -9,7 +9,7 @@ class User{
     this._userSchema = new Schema({
       urlImage: {
         type: String,
-        required: false
+        required: true
       },
       username:{
         type: String,
