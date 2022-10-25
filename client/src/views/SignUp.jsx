@@ -137,7 +137,7 @@ const SignUp = ()=>{
               <Eye className="eye" onClick={statePassword.changeState} />
             )}
           </div>
-          <button type="submit" onClick={onSubmit}>Sign In</button>
+          <button type="submit" onClick={onSubmit}>Sign Up</button>
         </form>
       </div>
     </div>

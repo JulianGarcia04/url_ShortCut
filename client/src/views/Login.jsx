@@ -40,12 +40,12 @@ const Login = ()=>{
         <div className="background-container">
             <div className="principal-container">
                 <h1>Sign in</h1>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div>
-                        <input type={userName.reducer.input.search('@')!==-1?'email':'text'} placeholder="User/email" autoComplete="off" required onChange={userName.actions.handleChange}/>
+                        <input type={userName.reducer.input.search('@')!==-1?'email':'text'} placeholder="User/email" required onChange={userName.actions.handleChange}/>
                     </div>
                     <div className="formPassword">
-                        <input type={statePassword.state?'text':'password'} name="password" placeholder="Password" required autoComplete="off" onChange={userPassword.actions.handleChange}/>
+                        <input type={statePassword.state?'text':'password'} placeholder="Password" required onChange={userPassword.actions.handleChange}/>
                         {
                             statePassword.state
                             ?<EyeOff className="eye" onClick={statePassword.changeState}/>
@@ -56,7 +56,7 @@ const Login = ()=>{
                         <input type="checkbox" id="checkMe"/>
                         Remember me
                     </label>
-                    <button type="submit">Sign In</button>
+                    <button type="submit" onClick={handleSubmit}>Sign In</button>
                 </form>
             </div>
         </div>
