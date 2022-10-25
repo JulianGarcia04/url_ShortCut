@@ -28,6 +28,9 @@ const Login = ()=>{
     const handleSubmit = async (e)=>{
         e.preventDefault();
         const token = await usersLoginController(data);
+        if(!token){
+            return
+        }
         dispatch(setToken(token))
         navegate('/');
     }
