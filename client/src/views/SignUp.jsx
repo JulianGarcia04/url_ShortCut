@@ -53,7 +53,7 @@ const SignUp = ()=>{
       name: name.reducer.input,
       lastname: lastname.reducer.input,
       email: email.reducer.input,
-      password: email.reducer.input
+      password: password.reducer.input
      })
     if(!token){
       return
