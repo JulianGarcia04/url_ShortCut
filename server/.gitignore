@@ -207,10 +207,6 @@ $RECYCLE.BIN/
 *.lnk
 
 #public folder
-<<<<<<< HEAD
-./public/image
-=======
 public/images
->>>>>>> 678f34b818af7a1a199985c49ba46a0f157bf23a
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,node,vue,react
