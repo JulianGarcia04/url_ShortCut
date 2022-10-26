@@ -37,11 +37,10 @@ abstract class servicesUser {
       const user = email
                  ? await User.findOne({email})
                  : await User.findOne({username})
-
       if(!user){
         throw boom.unauthorized("The email isn't correct");
       }
-      const validatePassword = await user.validatePassword(password);
+      const validatePassword:boolean = await user.validatePassword(password);
       if (!validatePassword) {
         throw boom.unauthorized("The password isn't correct")
       }
