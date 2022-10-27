@@ -9,11 +9,8 @@ export const uploadfile = async (value)=>{
                 "Content-Type": "multipart/form-data"
             }
         })
-        if(request.status >= 400){
-            throw new Error(request.data.message)
-        }
         return request;
     } catch (error) {
-        console.log(error)
+       throw error.response.data;
     }
 }

@@ -2,11 +2,11 @@ import React from "react";
 import { ChevronDown, ChevronUp } from 'react-feather';
 import '../static/styles/CardUrl.scss'
 
-const CardUrl = ({stateMenu})=>{
+const CardUrl = ({stateMenu, urlLarge, urlShort})=>{
     return(
         <div className={`cardUrl ${stateMenu.state? 'h-50':''}`}>
             <div className="headerCard">
-                <span>https://mail.google.com/mail/u/0/#inbox</span>
+                <span>{urlLarge}</span>
                 {
                     !stateMenu.state
                     ?<ChevronUp onClick={stateMenu.changeState} className="arrowMenuCard"/>
@@ -16,7 +16,7 @@ const CardUrl = ({stateMenu})=>{
             {
                 (stateMenu.state || window.screen.availWidth >= 1024)&&
                 <div className="footerCard">
-                    <span>https://beatly/5ED12</span>
+                    <span>{urlShort}</span>
                     <button>Copy</button>
                 </div>
             }
