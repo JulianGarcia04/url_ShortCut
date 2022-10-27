@@ -74,7 +74,7 @@ const NavBar = ()=>{
             {token ? (
                 <>
                     <div>
-                        <img src={iconUser} alt="" width={30} />
+                        <img src={user.urlImage} alt="" width={30} className="imageProfile" />
                         <span>{user.username}</span>
                     </div>
                     <Link to={"/login"} className="Url" onClick={()=>{
