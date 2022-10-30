@@ -5,10 +5,19 @@ class Url {
 
   constructor() {
     this._urlSchema = new Schema({
+      userId:{
+        type:String,
+        required: true
+      },
       originalUrl:{
         type: String,
         required: true,
         unique: true,
+        trim: true
+      },
+      urlShort: {
+        type: String,
+        require: false,
         trim: true
       }
     },{

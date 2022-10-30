@@ -1,5 +1,4 @@
 import Url from '../models/url';
-import userUrl from '../models/user.url';
 import { Request, Response, NextFunction } from 'express';
 import boom from '@hapi/boom';
 import dotenv from 'dotenv';
@@ -35,21 +34,22 @@ abstract class ServicesUrl {
   protected async createUrl(req:Request, res:Response, next:NextFunction){ //I will created to url with url shutcut
     try {
 
-      const {originalUrl} = req.body; //get to original url from body request
+      const { originalUrl } = req.body; //get to original url from body request
 
-      if (!originalUrl) {      //Validate the existents of original url
-        throw boom.badData('The field is empty');
+      if (!originalUrl) {
+        //Validate the existents of original url
+        throw boom.badData("The field is empty");
       }
-      const userId = req.userId;     //get to user id from middleware authentication
-
-      const url = await Url.create({originalUrl});    //I had created a new url instans it going save to databases
-
-      const id_url = (url._id as string).toString();  //convert to string the id of url instans
-
-      const new_url = new URL(`${req.protocol}://${req.hostname}${process.env.PORT?":"+process.env.PORT:''}/${id_url.substring(id_url.length-7, id_url.length)}`);  //I had created the new url, which it's now shutcut
-
-      const createUserUrl = await userUrl.create({id_user:userId, id_url:url._id, new_url:new_url.href})
-
+      const userId = req.userId; //get to user id from middleware authentication
+      const url = new Url({ userId, originalUrl }); //I had created a new url instans it going save to databases
+      const urlId: string = (url._id as string).toString();
+      const urlShort = new URL(
+        `${req.protocol}://${req.hostname}${
+          process.env.PORT ? ":" + process.env.PORT : ""
+        }/${urlId.substring(urlId.length - 7, urlId.length)}`
+      ); //I had created the new url, which it's now shutcut
+      url.urlShort = urlShort;
+      url.save();
       res.json({    //Response of server
         message: "data created correctly"
       })
