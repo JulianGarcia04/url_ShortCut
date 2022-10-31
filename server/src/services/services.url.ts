@@ -8,7 +8,8 @@ dotenv.config();
 abstract class ServicesUrl {
   protected async getUrls(req:Request, res:Response, next:NextFunction){
     try {
-      let data = await Url.find();
+      let userId = req.userId;
+      let data = await Url.find({userId});
       if(data.length == 0){
         throw boom.notFound("It have data in the database");
       }
