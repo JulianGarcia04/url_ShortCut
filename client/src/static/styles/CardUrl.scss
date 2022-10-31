@@ -8,6 +8,7 @@
     width: 90%;
     height: 25%;
     background-color: white;
+    margin: 10px 0px;
 
     span {
         font-size: small;
@@ -45,6 +46,7 @@
         height: 1.5625em;
         background-color: var(--bg-color-green);
         font-family: 'Dancing Script', cursive;
+        cursor: pointer;
     }
 }
 

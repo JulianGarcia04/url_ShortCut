@@ -1,24 +1,59 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {copyElement, createUrlController, createUrlClient} from "../controllers/app.controller.js";
 import useMenu from "../hooks/useModal";
 import useInput from "../hooks/useValue";
 import { useSelector } from "react-redux";
-import { createUrlController } from "../controllers/url.controller.js";
+import { getAllUrlLarge } from "../services/url.services.js";
 import imageIndex from '../static/images/IMAGE.svg';
 import CardUrl from "../components/CardUrl";
 import '../static/styles/App.scss'
 
 const App = ()=>{
 
-    const navBarState = useSelector(state=>state.stateMenu.value);
-    const token = useSelector(state=>state.token.value)
-    const stateMenu = useMenu();
-    const {actions, reducer} = useInput();
+    //states
+    const navBarState = useSelector(state=>state.stateMenu.value); //redux state of the navbar
+    const [urls, setUrls] = useState([]); //urls data
+    const token = useSelector(state=>state.token.value) //token of login
+    const stateMenu = useMenu(); // perzonalizated hook for state of little menu
+    const {actions, reducer} = useInput(); //save the input value in a state of react 
 
+    //fetching of data
+    useEffect(()=>{
+        if(!token){
+            return
+        }
+        getAllUrlLarge(token)
+        .then(res=>{
+            res.data.reverse();
+            res.data.length = 3;
+            setUrls(res.data);
+        });
+    }, [token])
+
+    //save jsx with the data
+    const dataStructured = urls.map((e) => {
+      return (
+        <CardUrl
+          stateMenu={stateMenu}
+          urlLarge={e.originalUrl}
+          urlShort={e.urlShort}
+          onClick={() => copyElement(e.urlShort)}
+          key={e._id}
+        />
+      );
+    });
+
+    //Send url
     const onSubmitUrl = async(e)=>{
-        e.preventDefault();
+        token
+        ?
         createUrlController({
             originalUrl: reducer.input
         }, token)
+        :
+        createUrlClient({
+            originalUrl: reducer.input
+        })
     }
 
     return (
@@ -30,7 +65,7 @@ const App = ()=>{
                     <input type="submit" value="Shorted" onClick={onSubmitUrl}/>
                 </form>
                 <div className="urlsContainer">
-                    <CardUrl stateMenu={stateMenu}/>
+                    {dataStructured}
                 </div>
             </div>
         </div>

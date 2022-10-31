@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronDown, ChevronUp } from 'react-feather';
 import '../static/styles/CardUrl.scss'
 
-const CardUrl = ({stateMenu, urlLarge, urlShort})=>{
+const CardUrl = ({stateMenu, urlLarge, urlShort, onClick})=>{
     return(
         <div className={`cardUrl ${stateMenu.state? 'h-50':''}`}>
             <div className="headerCard">
@@ -17,7 +17,7 @@ const CardUrl = ({stateMenu, urlLarge, urlShort})=>{
                 (stateMenu.state || window.screen.availWidth >= 1024)&&
                 <div className="footerCard">
                     <span>{urlShort}</span>
-                    <button>Copy</button>
+                    <button onClick={onClick}>Copy</button>
                 </div>
             }
         </div>
