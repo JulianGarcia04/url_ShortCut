@@ -34,7 +34,7 @@ export const createUrlController = async (data, token) => {
 export const createUrlClient = (data) => {
   let urlData = { _id: v4(), ...data };
 
-  let urlShort = `${window.location.protocol}//${
+  let urlShort =`${window.location.protocol}//${
     window.location.host
   }/${urlData._id.substring(urlData._id.length - 7, urlData._id.length)}`;
 
@@ -42,17 +42,17 @@ export const createUrlClient = (data) => {
 
   let dataParser = JSON.stringify([urlData]);
 
-  let urlsSession = sessionStorage.getItem("temporalsUrls");
+  let urlsSession = localStorage.getItem("temporalsUrls");
 
   if (!urlsSession) {
-    sessionStorage.setItem("temporalsUrls", dataParser);
+    localStorage.setItem("temporalsUrls", dataParser);
     return;
   }
   let urlSessionParse = JSON.parse(urlsSession);
 
   urlSessionParse.push(urlData);
 
-  sessionStorage.setItem("temporalsUrls", JSON.stringify(urlSessionParse));
+  localStorage.setItem("temporalsUrls", JSON.stringify(urlSessionParse));
   
   return;
 };

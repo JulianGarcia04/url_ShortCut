@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import store from './app/store.js';
 import MainLayout from "./layout/MainLayout.jsx";
 import App from './views/App.jsx';
+import Url from './views/Url.jsx';
 import Login from './views/Login.jsx';
 import SignUp from './views/SignUp.jsx';
 import Me from './views/Me.jsx';
@@ -18,6 +19,7 @@ root.render(
         <MainLayout>
           <Routes>
             <Route path='/' element={<App/>}/>
+            <Route path='/:id' element={<Url/>}/>
             <Route path='/me' element={<Me/>}/>
             <Route path='/Login' element={<Login/>}/>
             <Route path='/register' element={<SignUp/>}/>

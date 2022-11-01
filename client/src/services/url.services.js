@@ -21,3 +21,16 @@ export const createUrlLarge = async (data, token)=>{
         throw error.response.data;
     }
 }
+
+export const getAllUrlSession = ()=>{
+    try {
+        const data = JSON.parse(localStorage.getItem('temporalsUrls'));
+        if(!data){
+            throw new Error('No hay urls')
+        }
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+
+}

@@ -20,12 +20,12 @@ const App = ()=>{
     //fetching of data
     useEffect(()=>{
         if(!token){
-            let data = JSON.parse(sessionStorage.getItem("temporalsUrls"));
-            data.reverse();
-            data.length = 3;
+            let data = JSON.parse(localStorage.getItem("temporalsUrls"));
             if(!data){
                 return
             }
+            data.reverse();
+            data.length = 3;
             setUrls(data);
             return
         }
