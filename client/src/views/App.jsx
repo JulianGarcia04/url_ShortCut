@@ -20,6 +20,13 @@ const App = ()=>{
     //fetching of data
     useEffect(()=>{
         if(!token){
+            let data = JSON.parse(sessionStorage.getItem("temporalsUrls"));
+            data.reverse();
+            data.length = 3;
+            if(!data){
+                return
+            }
+            setUrls(data);
             return
         }
         getAllUrlLarge(token)
