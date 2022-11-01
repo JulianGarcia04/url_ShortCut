@@ -7,7 +7,7 @@ abstract class ServicesRedirect {
     try {
       const {id} = req.params;
 
-      let data;
+      let data:any = {};
       await (await Url.find()).forEach((e)=>{
         const idDocument = (e._id as string).toString();
         if(idDocument.endsWith(id)){
@@ -19,10 +19,7 @@ abstract class ServicesRedirect {
         throw boom.notFound("Data doesn't exists");
       }
 
-      res.json({
-        message: 'data is found',
-        data
-      })
+      res.redirect(data.originalUrl)
 
     } catch (error) {
       next(error);
