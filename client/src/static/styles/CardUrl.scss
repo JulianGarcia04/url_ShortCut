@@ -13,6 +13,24 @@
     span {
         font-size: small;
         font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .urlOriginalText{
+        height: 0.9375em;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .urlOriginalText:hover {
+        position: absolute;
+        height: 3.125em;
+        width: 18.75em;
+        overflow: visible;
+        z-index: 6;
+        background-color: white;
+        border-radius: 10px;
+        transition: 1s;
     }
 }
 
@@ -60,6 +78,15 @@
         flex-direction: row;
         span{
             font-size: 20px;
+        }
+
+        .urlOriginalText{
+            height: 1.5625em;
+        }
+        
+        .urlOriginalText:hover{
+            width: 36.75em;
+            height: 4.6875em;
         }
     }
 

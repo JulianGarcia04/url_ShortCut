@@ -6,7 +6,7 @@ const CardUrl = ({stateMenu, urlLarge, urlShort, onClick})=>{
     return(
         <div className={`cardUrl ${stateMenu.state? 'h-50':''}`}>
             <div className="headerCard">
-                <span>{urlLarge}</span>
+                <span className="urlOriginalText">{urlLarge}</span>
                 {
                     !stateMenu.state
                     ?<ChevronUp onClick={stateMenu.changeState} className="arrowMenuCard"/>

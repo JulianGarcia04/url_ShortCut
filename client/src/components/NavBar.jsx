@@ -17,111 +17,116 @@ import iconLogout from "../static/icons/icon-sidebar-logout.svg";
 import "../static/styles/NavBar.scss";
 
 const NavBar = () => {
-    //estado del menú desplegable
-    const stateMenu = useSelector((state) => state.stateMenu.value);
+  //estado del menú desplegable
+  const stateMenu = useSelector((state) => state.stateMenu.value);
 
-    //token
-    const token = useSelector((state) => state.token.value);
+  //token
+  const token = useSelector((state) => state.token.value);
 
-    const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user.value);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    //Obtener el usuario logueado del servidor y setearlo como estado global 
-    useEffect(() => {
-        if (!token) {
-        return;
-        }
-        getUser(token)
-        .then((res) => dispatch(setUser(res.data)))
-        .catch((e) => console.log("No haz iniciado sesion"));
-    }, [token, dispatch]);
+  //Obtener el usuario logueado del servidor y setearlo como estado global
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+    getUser(token)
+      .then((res) => dispatch(setUser(res.data)))
+      .catch((e) => console.log("No haz iniciado sesion"));
+  }, [token, dispatch]);
 
-    return (
-        <nav className={`nav-container ${stateMenu ? "open" : ""}`}>
-        <div className="nav-header">
-            <img
-            src={arrowMenu}
-            alt=""
-            width={30}
-            height={50}
-            className={`arrowMenu ${stateMenu ? "rotate" : ""}`}
-            onClick={() => dispatch(changeStateMenu())}
-            />
-            <Link to={"/"} className="logo">
-            <h4>BEATLY</h4>
-            </Link>
-            <img
-            src={menuBars}
-            alt=""
-            width={30}
-            className="menuBars"
-            onClick={() => dispatch(changeStateMenu())}
-            />
-        </div>
-        {(stateMenu || window.screen.availWidth >= 1024) && (
-            <>
-            <div className="nav-body">
-                <div>
-                <img src={iconQuestion} alt="Question" width={30} />
-                <span>Whats</span>
-                </div>
-                <div>
-                <img src={iconFile} alt="File" width={30} />
-                <span>Pricing</span>
-                </div>
-                <div>
-                <img src={iconApp} alt="AppStore" width={30} />
-                <span>App</span>
-                </div>
+  return (
+    <nav className={`nav-container ${stateMenu ? "open" : ""}`}>
+      <div className="nav-header">
+        <img
+          src={arrowMenu}
+          alt=""
+          width={30}
+          height={50}
+          className={`arrowMenu ${stateMenu ? "rotate" : ""}`}
+          onClick={() => dispatch(changeStateMenu())}
+        />
+        <Link to={"/"} className="logo">
+          <h4>BEATLY</h4>
+        </Link>
+        <img
+          src={menuBars}
+          alt=""
+          width={30}
+          className="menuBars"
+          onClick={() => dispatch(changeStateMenu())}
+        />
+      </div>
+      {(stateMenu || window.screen.availWidth >= 1024) && (
+        <>
+          <div className="nav-body">
+            <div>
+              <img src={iconQuestion} alt="Question" width={30} />
+              <span>Whats</span>
             </div>
-            <div className="nav-footer">
-                {token ? (
-                <>
-                    <div>
+            <div>
+              <img src={iconFile} alt="File" width={30} />
+              <span>Pricing</span>
+            </div>
+            <div>
+              <img src={iconApp} alt="AppStore" width={30} />
+              <span>App</span>
+            </div>
+          </div>
+          <div className="nav-footer">
+            {token ? (
+              <>
+                <Link 
+                    to={"/me"} 
+                    className="Url"
+                >
+                  <div>
                     <img
-                        src={user.urlImage}
-                        alt=""
-                        width={30}
-                        className="imageProfile"
+                      src={user.urlImage}
+                      alt=""
+                      width={30}
+                      className="imageProfile"
                     />
                     <span>{user.username}</span>
-                    </div>
-                    <Link
-                    to={"/login"}
-                    className="Url"
-                    onClick={() => {
-                        setCookie("__auth_user", "");
-                        dispatch(setToken(""));
-                    }}
-                    >
-                    <div>
-                        <img src={iconLogout} alt="" width={30} />
-                        <span>Logout</span>
-                    </div>
-                    </Link>
-                </>
-                ) : (
-                <>
-                    <Link to={"/register"} className="Url">
-                    <div>
-                        <img src={iconSingUp} alt="Register" width={30} />
-                        <span>Sign Up</span>
-                    </div>
-                    </Link>
-                    <Link to={"/login"} className="Url">
-                    <div>
-                        <img src={iconSingIn} alt="Login" width={30} />
-                        <span>Sign In</span>
-                    </div>
-                    </Link>
-                </>
-                )}
-            </div>
-            </>
-        )}
-        </nav>
-    );
+                  </div>
+                </Link>
+                <Link
+                  to={"/login"}
+                  className="Url"
+                  onClick={() => {
+                    setCookie("__auth_user", "");
+                    dispatch(setToken(""));
+                  }}
+                >
+                  <div>
+                    <img src={iconLogout} alt="" width={30} />
+                    <span>Logout</span>
+                  </div>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to={"/register"} className="Url">
+                  <div>
+                    <img src={iconSingUp} alt="Register" width={30} />
+                    <span>Sign Up</span>
+                  </div>
+                </Link>
+                <Link to={"/login"} className="Url">
+                  <div>
+                    <img src={iconSingIn} alt="Login" width={30} />
+                    <span>Sign In</span>
+                  </div>
+                </Link>
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </nav>
+  );
 };
 
 export default NavBar;
