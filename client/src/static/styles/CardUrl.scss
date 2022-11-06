@@ -6,7 +6,7 @@
     border-radius: 10px;
     box-sizing: border-box;
     width: 90%;
-    height: 25%;
+    height: 3.8125em;
     background-color: white;
     margin: 10px 0px;
 
@@ -20,10 +20,12 @@
         height: 0.9375em;
         width: 100%;
         overflow: hidden;
+        transition: 1s;
     }
     
     .urlOriginalText:hover {
         position: absolute;
+        text-align: center;
         height: 3.125em;
         width: 18.75em;
         overflow: visible;
@@ -39,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    height: 50%;
+    height: 62px;
     img{
         rotate: 270deg;
         color: var(--bg-color-green);
@@ -52,7 +54,7 @@
     border-top: 1px solid #000;
     align-items: center;
     width: 90%;
-    height: 50%;
+    height: 62px;
 
     button{
         display: flex;
@@ -69,7 +71,7 @@
 }
 
 .h-50 {
-    height: 50%;
+    height: 7.8125em;
 }
 
 @media (min-width:1024px){

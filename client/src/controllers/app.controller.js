@@ -1,20 +1,7 @@
-import copy from "copy-to-clipboard";
 import { createUrlLarge } from "../services/url.services.js";
 import Swal from "sweetalert2";
 import { v4 } from "uuid";
 
-export const copyElement = (text) => {
-  copy(text);
-  Swal.fire({
-    title: "Text Copied",
-    icon: "success",
-    position: "bottom",
-    toast: true,
-    timerProgressBar: true,
-    timer: 1500,
-    showConfirmButton: false,
-  });
-};
 
 export const createUrlController = async (data, token) => {
   try {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import {copyElement, createUrlController, createUrlClient} from "../controllers/app.controller.js";
-import useMenu from "../hooks/useModal";
+import {createUrlController, createUrlClient} from "../controllers/app.controller.js";
+import { copyElement } from "../utils/copyElements.js";
 import useInput from "../hooks/useValue";
 import { useSelector } from "react-redux";
 import { getAllUrlLarge } from "../services/url.services.js";
@@ -14,7 +14,6 @@ const App = ()=>{
     const navBarState = useSelector(state=>state.stateMenu.value); //redux state of the navbar
     const [urls, setUrls] = useState([]); //urls data
     const token = useSelector(state=>state.token.value) //token of login
-    const stateMenu = useMenu(); // perzonalizated hook for state of little menu
     const {actions, reducer} = useInput(); //save the input value in a state of react 
 
     //fetching of data
@@ -31,6 +30,12 @@ const App = ()=>{
         }
         getAllUrlLarge(token)
         .then(res=>{
+            if(window.screen.width < 1024){
+                res.data.reverse();
+                res.data.length = 1;
+                setUrls(res.data);
+                return 
+            }
             res.data.reverse();
             res.data.length = 3;
             setUrls(res.data);
@@ -41,7 +46,6 @@ const App = ()=>{
     const dataStructured = urls.map((e) => {
       return (
         <CardUrl
-          stateMenu={stateMenu}
           urlLarge={e.originalUrl}
           urlShort={e.urlShort}
           onClick={() => copyElement(e.urlShort)}

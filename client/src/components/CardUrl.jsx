@@ -1,8 +1,12 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from 'react-feather';
+import useMenu from '../hooks/useModal.js';
 import '../static/styles/CardUrl.scss'
 
-const CardUrl = ({stateMenu, urlLarge, urlShort, onClick})=>{
+const CardUrl = ({ urlLarge, urlShort, onClick})=>{
+
+    const stateMenu = useMenu();
+
     return(
         <div className={`cardUrl ${stateMenu.state? 'h-50':''}`}>
             <div className="headerCard">
