@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom';
 import CardUrl from "../components/CardUrl";
 import { getAllUrlLarge } from "../services/url.services";
 import { copyElement } from "../utils/copyElements";
@@ -9,16 +10,18 @@ const Me = () => {
   const [urls, setUrls] = useState([]);
   const token = useSelector((state) => state.token.value);
   const user = useSelector((state) => state.user.value);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
+      navigate('/login')
       return;
     }
     getAllUrlLarge(token).then((res) => {
       res.data.reverse();
       setUrls(res.data);
     });
-  }, [token]);
+  }, [token, navigate]);
 
   const listCart = urls.map((e) => {
     return (
