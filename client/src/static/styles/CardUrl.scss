@@ -6,12 +6,33 @@
     border-radius: 10px;
     box-sizing: border-box;
     width: 90%;
-    height: 25%;
+    height: 3.8125em;
     background-color: white;
+    margin: 10px 0px;
 
     span {
         font-size: small;
         font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .urlOriginalText{
+        height: 0.9375em;
+        width: 100%;
+        overflow: hidden;
+        transition: 1s;
+    }
+    
+    .urlOriginalText:hover {
+        position: absolute;
+        text-align: center;
+        height: 3.125em;
+        width: 18.75em;
+        overflow: visible;
+        z-index: 6;
+        background-color: white;
+        border-radius: 10px;
+        transition: 1s;
     }
 }
 
@@ -20,7 +41,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    height: 50%;
+    height: 62px;
     img{
         rotate: 270deg;
         color: var(--bg-color-green);
@@ -33,7 +54,7 @@
     border-top: 1px solid #000;
     align-items: center;
     width: 90%;
-    height: 50%;
+    height: 62px;
 
     button{
         display: flex;
@@ -45,11 +66,12 @@
         height: 1.5625em;
         background-color: var(--bg-color-green);
         font-family: 'Dancing Script', cursive;
+        cursor: pointer;
     }
 }
 
 .h-50 {
-    height: 50%;
+    height: 7.8125em;
 }
 
 @media (min-width:1024px){
@@ -58,6 +80,15 @@
         flex-direction: row;
         span{
             font-size: 20px;
+        }
+
+        .urlOriginalText{
+            height: 1.5625em;
+        }
+        
+        .urlOriginalText:hover{
+            width: 36.75em;
+            height: 4.6875em;
         }
     }
 

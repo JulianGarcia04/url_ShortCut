@@ -81,6 +81,11 @@
 
 }
 
+.imageProfile{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .open{
  height: 50vh;
  transition: 1000ms;   

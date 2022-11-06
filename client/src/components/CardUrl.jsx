@@ -1,12 +1,16 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from 'react-feather';
+import useMenu from '../hooks/useModal.js';
 import '../static/styles/CardUrl.scss'
 
-const CardUrl = ({stateMenu})=>{
+const CardUrl = ({ urlLarge, urlShort, onClick})=>{
+
+    const stateMenu = useMenu();
+
     return(
         <div className={`cardUrl ${stateMenu.state? 'h-50':''}`}>
             <div className="headerCard">
-                <span>https://mail.google.com/mail/u/0/#inbox</span>
+                <span className="urlOriginalText">{urlLarge}</span>
                 {
                     !stateMenu.state
                     ?<ChevronUp onClick={stateMenu.changeState} className="arrowMenuCard"/>
@@ -16,8 +20,8 @@ const CardUrl = ({stateMenu})=>{
             {
                 (stateMenu.state || window.screen.availWidth >= 1024)&&
                 <div className="footerCard">
-                    <span>https://beatly/5ED12</span>
-                    <button>Copy</button>
+                    <span>{urlShort}</span>
+                    <button onClick={onClick}>Copy</button>
                 </div>
             }
         </div>
